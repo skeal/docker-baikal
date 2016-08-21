@@ -7,16 +7,21 @@ ENV         DEBIAN_FRONTEND=noninteractive
 
 # Update package repository and install packages
 RUN         apt-get -y update && \
-            apt-get -y install supervisor php5-fpm php5-sqlite wget && \
+            apt-get -y install supervisor php5-fpm php5-sqlite wget curl php5-cli && \
             apt-get clean && \
             rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN         curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Fetch the latest software version from the official website if needed
-RUN         test ! -d /usr/share/nginx/html/baikal-regular && \
-            wget http://baikal-server.com/get/baikal-regular-0.2.7.tgz && \
-            tar xvzf baikal-regular-0.2.7.tgz -C /usr/share/nginx/html && \
-            chown -R www-data:www-data /usr/share/nginx/html/baikal-regular && \
-            rm baikal-regular-0.2.7.tgz
+RUN         test ! -d /usr/share/nginx/html/Baikal-0.4.6 && \
+            wget https://github.com/fruux/Baikal/archive/0.4.6.tar.gz && \
+            tar xvzf 0.4.6.tar.gz -C /usr/share/nginx/html && \
+            chown -R www-data:www-data /usr/share/nginx/html/Baikal-0.4.6 && \
+            rm 0.4.6.tar.gz
+
+WORKDIR     /usr/share/nginx/html/Baikal-0.4.6
+RUN         composer install
 
 # Add configuration files. User can provides customs files using -v in the image startup command line.
 COPY        supervisord.conf /etc/supervisor/supervisord.conf
