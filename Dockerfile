@@ -26,7 +26,7 @@ RUN         composer install
 # Add configuration files. User can provides customs files using -v in the image startup command line.
 COPY        supervisord.conf /etc/supervisor/supervisord.conf
 COPY        nginx.conf /etc/nginx/nginx.conf
-COPY        php-fpm.conf /etc/php5/fpm/php-fpm.conf
+COPY        php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
 
 # Expose HTTP port
 EXPOSE      80
