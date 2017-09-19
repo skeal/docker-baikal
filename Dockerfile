@@ -7,7 +7,7 @@ ENV         DEBIAN_FRONTEND=noninteractive
 
 # Update package repository and install packages
 RUN         apt-get -y update && \
-            apt-get -y install supervisor php-fpm php-sqlite wget curl php-cli php-mysql && \
+            apt-get -y install supervisor php-fpm php-sqlite3 wget curl php-cli php-mysql && \
             apt-get clean && \
             rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
