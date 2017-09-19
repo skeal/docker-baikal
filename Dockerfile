@@ -15,7 +15,7 @@ RUN         curl -sS https://getcomposer.org/installer | php -- --install-dir=/u
 
 # Fetch the latest software version from the official website if needed
 RUN         test ! -d /usr/share/nginx/html/Baikal-0.4.6 && \
-            wget https://github.com/skeal/docker-baikal/raw/master/Baikal-0.4.6.tar.gz && \
+            wget https://github.com/skeal/docker-baikal/raw/master/0.4.6.tar.gz && \
             tar xvzf 0.4.6.tar.gz -C /usr/share/nginx/html && \
             chown -R www-data:www-data /usr/share/nginx/html/Baikal-0.4.6 && \
             rm 0.4.6.tar.gz
